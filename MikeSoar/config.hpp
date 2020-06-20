@@ -39,6 +39,11 @@
 // --------------------------------------------------------------------------
 // datalog config
 // --------------------------------------------------------------------------
+// Log data to SD Card, 0=No, 1=Yes
+#define DATA_LOG      1
+// SD Card SPI chip select (CS) pin
+#define SD_PIN        8
+// Log interval
 #define DATA_PERIOD   6    // seconds
 // Units for temperature sensors (Added by: Kyle Crockett) moved this here
 // to be used for data reporting (aprs and logging)
@@ -165,7 +170,7 @@
 #define MIN_NO_CYCLIC_SATS     1
 // Units for temperature sensors (Added by: Kyle Crockett)
 // 1 = Celsius, 2 = Kelvin, 3 = Fahrenheit
-#define TEMP_UNIT 3
+//#define TEMP_UNIT 3
 
 // The voltage of the AVCC rail. Basically the 5V rail.
 // Nominally 4.99V, delta whatever the resistor tolerances

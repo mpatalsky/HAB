@@ -22,9 +22,10 @@
 
 // Trackuino custom libs
 #include "config.hpp"      // Main configuration file. Most minor settings are 
-                           // changed here for 'aprs.cpp', 'ax25.cpp', 
+                           // changed here for 'datalog.cpp', 'aprs.cpp', 'ax25.cpp', 
                            // 'afsk.cpp' (not sure if this is for afsk_avr.cpp',
                            // 'sensors.cpp' (I think this is for sensors_avr.cpp)
+#include "datalog.hpp"     // data logging to SD card
 #include "afsk_avr.hpp"    // afsk modem functions
 #include "aprs.hpp"        // creates the string for APRS transmission
 #include "gps.hpp"         // gps communciation, defines public GPS variables
