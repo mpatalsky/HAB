@@ -6,7 +6,14 @@
 
 #include "config.hpp"
 #include "datalog.hpp"
+#include "gps.hpp"
 #include <SD.h>
+
+// Public (extern) variables, readable from other modules
+// data file name - to be stored in root dir.
+char datafile[15];
+// sd card and file write working ok
+bool sd_ok;
 
 // create new file with header
 bool create_header(){
@@ -15,12 +22,33 @@ bool create_header(){
     return false;
   } else {
     // write header based on options
-    logfile.print("title1");
-    logfile.print(",title2");
+    logfile.print("GPS_Time");
+    logfile.print(",GPS_Lat");
+    logfile.print(",GPS_Lon");
+    logfile.print(",GPS_Course_Deg");
     logfile.println("");
+    logfile.close();
+    return true;
   }
+  return false;
 }
 
+// write data to file - opens and closes each time
+void log_data(){
+  File logfile = SD.open(datafile, FILE_WRITE);
+  if (logfile){
+    // write data based on options
+    logfile.print(gps_time);
+    logfile.print(",");
+    logfile.print(gps_aprs_lat);
+    logfile.print(",");
+    logfile.print(gps_aprs_lon);
+    logfile.print(",");
+    logfile.print(gps_course);
+    logfile.println("");
+    logfile.close();
+  }
+}
 
 // initialize data file - creates unique name if exists
 void datalog_setup(){
@@ -42,11 +70,5 @@ void datalog_setup(){
   } else {
     sd_ok = false;
   }
-  return;
-}
-
-
-// write data to file - opens and closes each time
-void log_data(){
   return;
 }

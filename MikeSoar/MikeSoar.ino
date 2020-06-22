@@ -70,6 +70,9 @@ void setup()
   afsk_setup();
   gps_setup();
   sensors_setup();
+  if (DATA_LOG==1){
+    datalog_setup();
+  }
 
 
   // Do not start until we get a valid time reference
@@ -169,16 +172,20 @@ void loop()
     DEBUG_UART.println("Message sent. Sleeping");
   }
 
-  // Check if time for another datalog - removed debugging
+  // If datalogging, Check if time for another datalog
   safe_pet_watchdog();
-  if ((int32_t) (millis() - next_datalog) >= 0)
-  {
-    
-    get_pos();
-    // add datalog here
-    // next datalog timestamp
-    next_datalog += 1000L * DATA_PERIOD;  
+  if ((DATA_LOG==1) && (sd_ok)){
+     if ((int32_t) (millis() - next_datalog) >= 0)
+    {
+      
+      get_pos();
+      // add datalog here
+      log_data();
+      // next datalog timestamp
+      next_datalog += 1000L * DATA_PERIOD;  
+    }
   }
+  
   
   power_save(); // Incoming GPS data or interrupts will wake us up
 }

@@ -42,7 +42,7 @@
 // Log data to SD Card, 0=No, 1=Yes
 #define DATA_LOG      1
 // SD Card SPI chip select (CS) pin
-#define SD_PIN        8
+#define SD_PIN        8    // change to pi used on leonardo to connect to sd shield
 // Log interval
 #define DATA_PERIOD   6    // seconds
 // Units for temperature sensors (Added by: Kyle Crockett) moved this here
